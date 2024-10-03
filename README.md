@@ -33,6 +33,10 @@ The Kalman Filter is an efficient recursive filter that estimates the state of a
 
 The Kalman Filter algorithm can be summarized in two main steps:
 
+```math 
+\hat{x}_{k} = A_k \hat{x}_{k-1}
+```
+
 1. **Prediction**:
    - Predict the state:
 
