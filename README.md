@@ -35,13 +35,14 @@ The Kalman Filter algorithm can be summarized in two main steps:
 
 1. **Prediction**:
    - Predict the state:
-   ```math
-   \hat{x}_{k} = A_k \hat{x}_{k-1}
-    ```
+
+   $$\hat{x}_{k} = A_k \hat{x}_{k-1}$$
+
    - Some times we have control input \(u_k\) and process noise \(w_k\) from gaussian \(Q\), then the prediction step will be:
-    ```math
-   \hat{x}_{k} = A_k \hat{x}_{k-1} + B_k u_k + w_k
-    ```
+    
+   
+   $$\hat{x}_{k} = A_k \hat{x}_{k-1} + B_k u_k + w_k$$
+
    - Predict the error covariance:
 
    $$P_{k} = A_k P_{k-1} A_k^T + Q_k$$
@@ -49,8 +50,10 @@ The Kalman Filter algorithm can be summarized in two main steps:
 2. **Update**:
    - Compute the Kalman Gain:
    
-   $$K_k = P_{k} C_k^T (C_k P_{k} C_k^T + R_k)^{-1}$$
-   
+   ```math
+   K_k = P_{k} C_k^T (C_k P_{k} C_k^T + R_k)^{-1}
+   ```
+
    - Update the state estimate:
    \[
    \hat{x}_{k} = \hat{x}_{k} + K_k (z_k - C_k \hat{x}_{k})
