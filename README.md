@@ -47,7 +47,7 @@ The Kalman Filter algorithm can be summarized in two main steps:
 2. **Update**:
    - Compute the Kalman Gain: $$K_k = P_{k} C_k^T (C_k P_{k} C_k^T + R_k)^{-1}$$
 
-   - Update the state estimate: $$x_{k} = {x}_{k} + K_k (z_k - C_k {x}_{k})$$
+   - Update the state estimate: $$x_{k} = x_{k} + K_k (z_k - C_k x_{k})$$
    - Update the error covariance: $$P_{k} = (I - K_k C_k) P_{k}$$
 
 ### Implementation
