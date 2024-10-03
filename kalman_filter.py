@@ -14,7 +14,7 @@ class KalmanFilter:
         self.q= 0.5 # process noise variable for Kalman filter Q
 
     def A(self):
-        # system matrix
+        # system/state transition matrix
         dt = self.dt
         return np.matrix([[1,0,1,1], 
                           [0,1,0,1],
@@ -71,7 +71,7 @@ def run_filter(gps_data, vio_data, noise_gps, noise_vio):
     Q_gps = np.eye(4)
     Q_odom = np.eye(4)
 
-    # R - measurement noise (2x2)
+    # R - measurement noise (2x2) -> observation noise assumed as gaussian
     R_gps = noise_gps * np.eye(2)
     R_odom = noise_vio * np.eye(2)
 

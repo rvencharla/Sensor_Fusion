@@ -36,6 +36,21 @@ class ParticleFilter:
         # measurement matrix C, true state space
         return np.matrix([[1,0, 0, 0],
                          [0,1, 0, 0]])
+    
+    def predict(self):
+        self.particles = np.linalg.inv(np.eye(2)-0.01*self.A()) + self.Q()
+
+    def update(self, z):
+        # z is data
+        weights = np.zeros(self.num_particles)
+        for i in range(len(self.particles)):
+            likelihood = self.likelihood(self.particles[i], z, self.Q())
+            weights[i] = likelihood
+
+        # Normalize weights
+        weights /= sum(weights)
+
+        return weights
 
     def resample(self, weights_array):
         n = len(weights_array)
@@ -56,18 +71,9 @@ class ParticleFilter:
     
     def run_filter_pf(self, gps_data, vio_data):
         for t in range(len(gps_data)):
-            # Predict step
-            self.particles = np.linalg.inv(np.eye(2)-0.01*self.A()) + self.Q()
+            self.particles = self.predict()
 
-            # Update step
-            weights = np.zeros(self.num_particles)
-            for i in range(len(self.particles)):
-                likelihood_gps = self.likelihood(self.particles[i], gps_data[t], self.Q())
-                likelihood_vio = self.likelihood(self.particles[i], vio_data[t], self.Q())
-                weights[i] = likelihood_gps * likelihood_vio
-
-            # Normalize weights
-            weights /= sum(weights)
+            weights = self.update(gps_data[t])
 
             # Resample
             indexes = self.resample(weights)
