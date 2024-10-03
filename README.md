@@ -43,9 +43,7 @@ The Kalman Filter algorithm can be summarized in two main steps:
    \hat{x}_{k} = A_k \hat{x}_{k-1} + B_k u_k + w_k
     ```
    - Predict the error covariance:
-   \[
-   P_{k} = A_k P_{k-1} A_k^T + Q_k
-   \]
+   $$P_{k} = A_k P_{k-1} A_k^T + Q_k$$
 
 2. **Update**:
    - Compute the Kalman Gain:
