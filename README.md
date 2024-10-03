@@ -35,23 +35,19 @@ The Kalman Filter algorithm can be summarized in two main steps:
 
 1. **Prediction**:
    - Predict the state: 
-   ```math
-   {x}_{k} = A_k {x}_{k-1}
-   ```
+   $$x_{k} = A_k {x}_{k-1}$$
    
 
    - Some times we have control input $u_k$ and process noise $w_k$ from gaussian $Q$, then the prediction step will be:
    
-   $$
-   {x}_{k} = A_k {x}_{k-1} + B_k u_k + w_k
-   $$
+   $$x_{k} = A_k {x}_{k-1} + B_k u_k + w_k$$
 
    - Predict the error covariance: $$P_{k} = A_k P_{k-1} A_k^T + Q_k$$
 
 2. **Update**:
    - Compute the Kalman Gain: $$K_k = P_{k} C_k^T (C_k P_{k} C_k^T + R_k)^{-1}$$
 
-   - Update the state estimate: $${x}_{k} = {x}_{k} + K_k (z_k - C_k {x}_{k})$$
+   - Update the state estimate: $$x_{k} = {x}_{k} + K_k (z_k - C_k {x}_{k})$$
    - Update the error covariance: $$P_{k} = (I - K_k C_k) P_{k}$$
 
 ### Implementation
@@ -105,20 +101,14 @@ The Particle Filter algorithm can be summarized as follows:
 
 2. **Prediction**:
    - For each particle $i$, propagate the state:
-   $$
-   x_k^i \sim p(x_k | x_{k-1}^i, u_k)
-   $$
+   $${x_k^i} \sim p(x_{k} | x_{k-1}^i, u_{k})$$
    where $u_k$ is the control input.
 
 3. **Update**:
    - For each particle $i$, update the weight based on the observation:
-   $$
-   w_k^i \propto w_{k-1}^i \cdot p(z_k | x_k^i)
-   $$
-   Normalize the weights:
-   $$
-   w_k^i = \frac{w_k^i}{\sum_{j=1}^{N} w_k^j}
-   $$
+   $${w_k^i} \propto w_{k-1}^i \cdot p(z_k | x_k^i)$$
+   - Normalize the weights:
+   $$w_k^i = \frac{w_k^i}{\sum_{j=1}^{N} w_k^j}$$
 
 4. **Resampling**:
    - Resample $N$ particles based on their weights $w_k^i$ to create a new set of particles ${x_k^{i'}}$
