@@ -34,16 +34,14 @@ The Kalman Filter is an efficient recursive filter that estimates the state of a
 The Kalman Filter algorithm can be summarized in two main steps:
 
 1. **Prediction**:
-   + Predict the state: $$\hat{x}_{k} = A_k \hat{x}_{k-1}$$
+   + Predict the state: $${\hat{x}_{k} = A_k \hat{x}_{k-1}}$$
    
 
    + Some times we have control input $u_k$ and process noise $w_k$ from gaussian $Q$, then the prediction step will be:
    
-   <!-- $$
+   $$
    \hat{x}_{k} = A_k \hat{x}_{k-1} + B_k u_k + w_k
-   $$ --> 
-
-<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%20%20%20%5Chat%7Bx%7D_%7Bk%7D%20%3D%20A_k%20%5Chat%7Bx%7D_%7Bk-1%7D%20%2B%20B_k%20u_k%20%2B%20w_k%0D"></div>
+   $$
 
    - Predict the error covariance: $$P_{k} = A_k P_{k-1} A_k^T + Q_k$$
 
